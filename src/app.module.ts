@@ -1,16 +1,18 @@
-import { APP_PIPE } from '@nestjs/core';
-import { BingWallpaperModule } from './bing-wallpaper/bing-wallpaper.module';
 import { Module } from '@nestjs/common';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ZodValidationPipe } from 'nestjs-zod';
+
+import { BingWallpaperModule } from './bing-wallpaper/bing-wallpaper.module';
+import { AppInterceptor } from './utils/app.interceptor';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
-      database: 'db.sqlite',
+      database: 'src/database/db.sqlite',
       synchronize: true,
-      entities: ['*.entity.ts'],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     BingWallpaperModule,
   ],
@@ -19,6 +21,10 @@ import { ZodValidationPipe } from 'nestjs-zod';
     {
       provide: APP_PIPE,
       useClass: ZodValidationPipe,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AppInterceptor,
     },
   ],
 })

@@ -1,30 +1,24 @@
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'nestjs-zod/z';
 
+import { BingWallpaperType } from '../bing-wallpaper.entity';
+
+export enum EMkt {
+  enUS = 'en-US',
+  zhCN = 'zh-CN',
+}
+
 export const getBingWallpaperSchema = z.object({
-  startTimestamp: z.number(),
-  endTimestamp: z.number(),
+  startTimestamp: z.number().describe('开始时间戳'),
+  endTimestamp: z.number().describe('结束时间戳'),
+  language: z
+    .enum([EMkt.enUS, EMkt.zhCN])
+    .optional()
+    .default(EMkt.zhCN)
+    .describe('语言'),
 });
 
 export class GetBingWallpaperDto extends createZodDto(getBingWallpaperSchema) {}
-
-export interface IBingWallpaperItem {
-  startdate: string;
-  fullstartdate: string;
-  enddate: string;
-  url: string;
-  urlbase: string;
-  copyright: string;
-  copyrightlink: string;
-  title: string;
-  quiz: string;
-  wp: boolean;
-  hsh: string;
-  drk: number;
-  top: number;
-  bot: number;
-  hs?: any;
-}
 
 export interface IBingWallpaperFilter {
   n?: number;
@@ -34,12 +28,7 @@ export interface IBingWallpaperFilter {
 }
 
 export interface IBingWallpaperResponse {
-  images: IBingWallpaperItem[];
-}
-
-export enum EMkt {
-  enUS = 'en-US',
-  zhCN = 'zh-CN',
+  images: BingWallpaperType[];
 }
 
 export enum EFormat {
