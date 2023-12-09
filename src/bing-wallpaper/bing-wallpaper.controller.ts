@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { BingWallpaper } from './bing-wallpaper.entity';
+import { BingWallpaper } from './entities/bing-wallpaper.entity';
 import { BingWallpaperService } from './bing-wallpaper.service';
 import { GetBingWallpaperDto } from './dto/bing-wallpaper.dto';
 

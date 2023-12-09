@@ -1,7 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { EMkt } from './dto/bing-wallpaper.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { EMkt } from '../dto/bing-wallpaper.dto';
 
 @Entity()
 export class BingWallpaper {

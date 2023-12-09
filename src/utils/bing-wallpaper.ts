@@ -4,7 +4,7 @@ import {
   IBingWallpaperFilter,
 } from '~/bing-wallpaper/dto/bing-wallpaper.dto';
 
-import { BingWallpaperType } from '~/bing-wallpaper/bing-wallpaper.entity';
+import { BingWallpaperType } from '~/bing-wallpaper/entities/bing-wallpaper.entity';
 
 const BING_URI_BASE = 'http://www.bing.com';
 

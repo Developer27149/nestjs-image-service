@@ -1,7 +1,6 @@
+import { BingWallpaperType } from '../entities/bing-wallpaper.entity';
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'nestjs-zod/z';
-
-import { BingWallpaperType } from '../bing-wallpaper.entity';
 
 export enum EMkt {
   enUS = 'en-US',

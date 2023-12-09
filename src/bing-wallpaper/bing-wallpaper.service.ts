@@ -4,8 +4,8 @@ import { format } from 'date-fns';
 import { LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 
 import { getBingWallpaperByFilter } from '../utils/bing-wallpaper';
-import { BingWallpaper } from './bing-wallpaper.entity';
 import { GetBingWallpaperDto } from './dto/bing-wallpaper.dto';
+import { BingWallpaper } from './entities/bing-wallpaper.entity';
 
 @Injectable()
 export class BingWallpaperService {
@@ -41,7 +41,11 @@ export class BingWallpaperService {
           urlbase: item.urlbase,
         },
       });
-      if (!existingItem) {
+      if (existingItem) {
+        // update existing item
+        this.bingWallpaperRepository.update(existingItem.id, { ...item });
+      } else {
+        // create new item
         const newItem = this.bingWallpaperRepository.create({ ...item });
         this.bingWallpaperRepository.save(newItem);
       }
